@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katalog Grosir Premium - Harel Beauty House</title>
+    <!-- FAVICON (Gunakan logo kamu) -->
+    <link rel="icon" type="image/png" href="assets/logo2.png">
+    <!-- Pilihan opsional untuk tampilan di iPhone/iPad saat di-bookmark -->
+    <link rel="apple-touch-icon" href="assets/logo2.png">
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            500: '#6366f1', 
+                            600: '#5B32E4', // Warna ungu menyesuaikan logo Harel
+                            dark: '#0f172a',
+                            light: '#fafafa' 
+                        }
+                    },
+                    animation: {
+                        'shimmer': 'shimmer 2.5s infinite linear',
+                        'fade-in-up': 'fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'marquee-seamless': 'marqueeSeamless 12s linear infinite'
+                    },
+                    keyframes: {
+                        shimmer: {
+                            '0%': { backgroundPosition: '-200% 0' },
+                            '100%': { backgroundPosition: '200% 0' }
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        marqueeSeamless: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        .delay-1 { animation-delay: 100ms; }
+        .delay-2 { animation-delay: 200ms; }
+        
+        .shimmer-btn {
+            background: linear-gradient(90deg, #EE4D2D 25%, #ff765b 50%, #EE4D2D 75%);
+            background-size: 200% 100%;
+        }
+    </style>
+</head>
+<body class="bg-brand-light text-brand-dark pb-28 antialiased selection:bg-brand-100">
+
+    <!-- TOP ANNOUNCEMENT TICKER -->
+    <div class="bg-brand-600 text-white text-[11px] font-bold py-2 overflow-hidden relative w-full flex">
+        <div class="flex whitespace-nowrap animate-marquee-seamless will-change-transform text-center select-none">
+            <span class="px-4">⚡ SUBSIDI ONGKIR CARGO HARI INI: 4 DARI 10 KUOTA TERPAKAI — RESET BESOK PAGI ⚡</span>
+            <span class="px-4">⚡ SUBSIDI ONGKIR CARGO HARI INI: 4 DARI 10 KUOTA TERPAKAI — RESET BESOK PAGI ⚡</span>
+        </div>
+    </div>
+
+    <!-- MAIN BRAND HEADER WITH IMAGE LOGO -->
+   <header class="bg-white/80 backdrop-blur-md border-b border-rose-100 sticky top-0 z-40">
+        <div class="max-w-md mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+                <img src="assets/logo3.png" alt="Harel Beauty House" class="h-9 w-auto object-contain" style="border-radius: 12px;">
+                <div class="flex flex-col">
+                    <span class="font-black text-slate-900 tracking-tight text-base leading-none">HAREL <span class="text-brand-600">BEAUTY</span></span>
+                    <span class="text-[9px] font-bold text-slate-400 tracking-wider uppercase mt-0.5">Official Wholesale Store</span>
+                </div>
+            </div>
+            <div class="flex items-center gap-1.5 bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full border border-emerald-100 text-[10px] font-bold">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Verified
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="opacity-0 animate-fade-in-up bg-gradient-to-b from-purple-50/60 to-brand-light pt-6 pb-6 px-4 text-center">
+        <div class="max-w-md mx-auto space-y-3.5">
+            <div class="inline-flex items-center gap-1.5 bg-white border border-purple-200 text-brand-600 font-bold text-[10px] uppercase tracking-wider px-3 py-1 rounded-full shadow-sm">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> 100% Original Distributor
+            </div>
+            
+            <h1 class="text-2xl font-extrabold tracking-tight text-slate-900 leading-tight">
+                Siap Kulakan? <br><span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-purple-600">Harga Grosir Langsung Aktif</span>
+            </h1>
+            
+            <p class="text-xs text-slate-500 leading-relaxed max-w-xs mx-auto">
+                Tanpa syarat ribet. Cukup campur minimal 6 pcs, harga otomatis terpotong ekstrem saat checkout.
+            </p>
+        </div>
+    </section>
+
+    <!-- 1. ALASAN KENAPA HARUS GROSIR DI SINI -->
+    <section class="opacity-0 animate-fade-in-up delay-1 max-w-md mx-auto px-4 py-2">
+        <div class="bg-white border border-slate-100 rounded-2xl p-4 shadow-xs space-y-3">
+            <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Kenapa Pilih Harel Beauty?</h3>
+            
+            <div class="flex items-start gap-3">
+                <div class="bg-purple-50 p-2 rounded-xl text-brand-600 font-bold text-sm">📦</div>
+                <div>
+                    <h4 class="text-xs font-bold text-slate-900">Tangan Pertama / Stok Melimpah</h4>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Barang disuplai langsung dari pabrik utama, jaminan kontinuitas pasokan toko Anda.</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-3 border-t border-slate-50 pt-3">
+                <div class="bg-purple-50 p-2 rounded-xl text-brand-600 font-bold text-sm">🔒</div>
+                <div>
+                    <h4 class="text-xs font-bold text-slate-900">Jaminan 100% Produk Original</h4>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Semua produk berizin BPOM resmi. Uang kembali penuh jika terbukti tiruan.</p>
+                </div>
+            </div>
+
+            <div class="flex items-start gap-3 border-t border-slate-50 pt-3">
+                <div class="bg-purple-50 p-2 rounded-xl text-brand-600 font-bold text-sm">🚚</div>
+                <div>
+                    <h4 class="text-xs font-bold text-slate-900">Support Cargo & Ongkir Hemat</h4>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Mendukung ekspedisi kargo pilihan di Shopee untuk menekan ongkos kirim partai besar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. KATALOG LIST BARANG -->
+    <main class="max-w-md mx-auto px-4 mt-4 space-y-4">
+        <!-- JUDUL DIUBAH Sesuai Permintaan -->
+        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider px-1">Produk Terlaris Minggu Ini</h3>
+        
+        <!-- BARANG A: SIKAT GIGI FORMULA -->
+        <div class="product-card opacity-0 animate-fade-in-up delay-2 bg-white border border-slate-100 rounded-2xl p-4 shadow-sm flex flex-col justify-between transition-all">
+            <div>
+                <div class="relative w-full bg-slate-50 rounded-xl overflow-hidden mb-3.5">
+                    <img src="assets/formula.png" alt="Sikat Gigi Formula" class="w-full h-full object-cover">
+                    <span class="absolute top-2.5 right-2.5 bg-emerald-500/90 backdrop-blur-xs text-white text-[9px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider">Ready</span>
+                </div>
+                
+                <div>
+                    <h2 class="font-bold text-slate-900 text-sm">Sikat Gigi Formula</h2>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Variant: Trendy, Double Action, Ripple</p>
+                </div>
+                
+                <div class="mt-3.5 bg-slate-50/50 p-2.5 rounded-xl border border-slate-100">
+                    <div class="grid grid-cols-3 gap-1.5 text-center text-xs">
+                        <div class="bg-white p-2 rounded-lg border border-slate-200">
+                            <div class="text-slate-500 text-[9px]">1 Box</div>
+                            <div class="font-bold text-slate-700 mt-0.5 text-[12px]">39.500</div>
+                        </div>
+                        <div class="bg-purple-50 p-2 rounded-lg border-2 border-brand-600 relative shadow-xs">
+                            <div class="absolute -top-2 left-1/2 -translate-x-1/2 bg-brand-600 text-[7px] text-white font-extrabold px-1 rounded">BEST</div>
+                            <div class="text-brand-600 text-[9px] font-semibold">6 Box</div>
+                            <div class="font-bold text-brand-600 mt-0.5 text-[12px]">230.500</div>
+                        </div>
+                        <div class="bg-white p-2 rounded-lg border border-slate-200">
+                            <div class="text-slate-500 text-[9px]">12 Box</div>
+                            <div class="font-bold text-slate-900 mt-0.5 text-[12px]">459.500</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- DIRECT PRODUCT ACTION BUTTON WITH NOTES -->
+            <div class="mt-4 pt-3 border-t border-slate-100 flex flex-col gap-2">
+                <div class="flex items-center justify-between gap-2">
+                    <div class="flex flex-col">
+                        <span class="text-[9px] text-slate-400">Modal 1 pcs</span>
+                        <strong class="text-slate-700 font-bold text-xs">3.300</strong>
+                    </div>
+                    <a href="https://shopee.co.id/-HARGA-GROSIR-Sikat-Gigi-Formula-12PCS-160gr-Original-100--i.1165566102.28259962899?extraParams=%7B%22display_model_id%22%3A226726890053%2C%22model_selection_logic%22%3A2%7D" target="_blank" rel="noopener noreferrer" class="bg-[#EE4D2D] hover:bg-[#ff5737] text-white font-bold text-[11px] px-3.5 py-2 rounded-xl transition-all active:scale-95 shadow-xs flex items-center gap-1">
+                        🛒 Beli Grosir
+                    </a>
+                </div>
+                <!-- NOTES KECIL DITAMBAHKAN DI SINI -->
+                <span class="text-[9px] text-amber-600 font-medium text-center bg-amber-50/80 px-2 py-0.5 rounded border border-amber-100/60">
+                    💡 Cek langsung di aplikasi Shopee karna biasanya ada diskon tambahan
+                </span>
+            </div>
+        </div>
+
+        <!-- BARANG B: PIGEON NIPPLE -->
+        <div class="product-card opacity-0 animate-fade-in-up delay-2 bg-white border border-slate-100 rounded-2xl p-4 shadow-sm flex flex-col justify-between transition-all">
+            <div>
+                <div class="relative w-full bg-slate-50 rounded-xl overflow-hidden mb-3.5">
+                    <img src="assets/nipple-pigeon.png" alt="Produk B" class="w-full h-full object-cover">
+                    <span class="absolute top-2.5 right-2.5 bg-emerald-500/90 backdrop-blur-xs text-white text-[9px] font-bold px-2 py-0.5 rounded-md uppercase tracking-wider">Ready</span>
+                </div>
+                
+                <div>
+                    <h2 class="font-bold text-slate-900 text-sm">Pigeon Silicone Nipple</h2>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Ukuran: S (Standar), M (Standar), L (Ulir)</p>
+                </div>
+                
+                <div class="mt-3.5 bg-slate-50/50 p-2.5 rounded-xl border border-slate-100">
+                    <div class="grid grid-cols-3 gap-1.5 text-center text-xs">
+                        <div class="bg-white p-2 rounded-lg border border-slate-200">
+                            <div class="text-slate-500 text-[9px]">1 Toples</div>
+                            <div class="font-bold text-slate-700 mt-0.5 text-[12px]">198.200</div>
+                        </div>
+                        <div class="bg-purple-50 p-2 rounded-lg border-2 border-brand-600 relative shadow-xs">
+                            <div class="absolute -top-2 left-1/2 -translate-x-1/2 bg-brand-600 text-[7px] text-white font-extrabold px-1 rounded">BEST</div>
+                            <div class="text-brand-600 text-[9px] font-semibold">6 Toples</div>
+                            <div class="font-bold text-brand-600 mt-0.5 text-[12px]">1.179.500 </div>
+                        </div>
+                        <div class="bg-white p-2 rounded-lg border border-slate-200">
+                            <div class="text-slate-500 text-[9px]">12 Toples</div>
+                            <div class="font-bold text-slate-900 mt-0.5 text-[12px]">2.357.600 </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- DIRECT PRODUCT ACTION BUTTON WITH NOTES -->
+            <div class="mt-4 pt-3 border-t border-slate-100 flex flex-col gap-2">
+                <div class="flex items-center justify-between gap-2">
+                    <div class="flex flex-col">
+                        <span class="text-[9px] text-slate-400">Modal 1 pcs</span>
+                        <strong class="text-slate-700 font-bold text-xs">11.011</strong>
+                    </div>
+                    <a href="https://shopee.co.id/Pigeon-Silicone-Nipple-DOT-BOTOL-SUSU-PIGEON-1-TOPLES-18PCS-i.1165566102.24913716502?extraParams=%7B%22display_model_id%22%3A168068329344%2C%22model_selection_logic%22%3A3%7D" target="_blank" rel="noopener noreferrer" class="bg-[#EE4D2D] hover:bg-[#ff5737] text-white font-bold text-[11px] px-3.5 py-2 rounded-xl transition-all active:scale-95 shadow-xs flex items-center gap-1">
+                        🛒 Beli Grosir
+                    </a>
+                </div>
+                <!-- NOTES KECIL DITAMBAHKAN DI SINI -->
+                <span class="text-[9px] text-amber-600 font-medium text-center bg-amber-50/80 px-2 py-0.5 rounded border border-amber-100/60">
+                    💡 Cek langsung di aplikasi Shopee karna biasanya ada diskon tambahan
+                </span>
+            </div>
+        </div>
+
+        <!-- INFO VARIANT DI SHOPEE -->
+        <div class="bg-amber-50 border border-amber-200 rounded-xl p-3 text-center text-[11px] text-amber-800 font-medium">
+            💡 Mencari produk kosmetik/skincare merk lain? Ratusan katalog ecer dan grosir lengkap siap Anda cek langsung di dalam toko Shopee kami.
+        </div>
+    </main>
+
+    <!-- 3. FAQ SECTION (ACCORDION STYLE) -->
+    <section class="max-w-md mx-auto px-4 mt-6">
+        <h3 class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-3 px-1">Pertanyaan Umum (FAQ)</h3>
+        <div class="space-y-2">
+            <!-- FAQ 1 -->
+            <div class="bg-white border border-slate-100 rounded-xl overflow-hidden">
+                <button onclick="toggleFaq(1)" class="w-full text-left p-3.5 flex justify-between items-center text-xs font-bold text-slate-800 focus:outline-none">
+                    <span>Apakah bisa campur varian dan produk item lain?</span>
+                    <span id="faq-icon-1" class="transition-transform duration-200 text-slate-400">+</span>
+                </button>
+                <div id="faq-ans-1" class="hidden p-3.5 pt-0 text-[11px] text-slate-400 border-t border-slate-50 leading-relaxed">
+                    Bisa banget. Aturan minimal 6 pcs dihitung dari akumulasi total belanjaan produk kosmetik apa saja di etalase grosir kami, tidak harus satu jenis shade saja.
+                </div>
+            </div>
+            <!-- FAQ 2 -->
+            <div class="bg-white border border-slate-100 rounded-xl overflow-hidden">
+                <button onclick="toggleFaq(2)" class="w-full text-left p-3.5 flex justify-between items-center text-xs font-bold text-slate-800 focus:outline-none">
+                    <span>Bagaimana jika ada barang rusak di perjalanan?</span>
+                    <span id="faq-icon-2" class="transition-transform duration-200 text-slate-400">+</span>
+                </button>
+                <div id="faq-ans-2" class="hidden p-3.5 pt-0 text-[11px] text-slate-400 border-t border-slate-50 leading-relaxed">
+                    Kami mendukung penuh Garansi Shopee. Pastikan membuat video unboxing lengkap saat membuka paket cargo agar klaim retur/dana bisa segera dicairkan jika ada kelalaian ekspedisi.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. CONTACT US VIA WHATSAPP -->
+    <section class="max-w-md mx-auto px-4 mt-6 text-center" style="margin-bottom: 50px;">
+        <div class="bg-emerald-50/50 border border-emerald-100/60 rounded-2xl p-4">
+            <h4 class="text-xs font-bold text-slate-800">Mau Ambil Partai Besar / Nego Kargo Manual?</h4>
+            <p class="text-[10px] text-slate-400 mt-1 mb-3">Butuh suplai di atas 500 pcs untuk agen daerah? Tim admin kami siap membantu pencarian kargo alternatif termurah.</p>
+            <a href="https://wa.me/6281292567788?text=Halo%20Admin%2520Harel%2520Beauty,%20saya%20tertarik%20ambil%20partai%20besar%20grosir" 
+               target="_blank" rel="noopener noreferrer"
+               class="inline-flex items-center gap-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] px-4 py-2.5 rounded-xl shadow-xs transition-colors">
+                💬 Hubungi Admin via WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- TOAST POPUP NOTIFICATION -->
+    <div id="live-toast" style="margin-bottom: 10px;" class="fixed bottom-24 left-4 right-4 sm:right-auto sm:max-w-xs bg-slate-900/95 backdrop-blur-md text-white px-3.5 py-2.5 rounded-xl shadow-xl z-50 flex items-center gap-2.5 border border-slate-800 opacity-0 translate-y-10 pointer-events-none transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]">
+        <span class="text-base">🔥</span>
+        <div class="text-[11px]">
+            <span id="toast-number" class="font-bold text-purple-400">35</span> pemilik toko retail sedang memantau halaman grosir ini.
+        </div>
+    </div>
+
+    <!-- STICKY BOTTOM ACTION BAR -->
+    <div class="fixed bottom-0 inset-x-0 bg-white/95 backdrop-blur-md border-t border-slate-150 p-4 shadow-[0_-8px_24px_rgba(0,0,0,0.04)] z-50">
+        <div class="max-w-md mx-auto">
+            <a href="https://shopee.co.id/harelbeautyhouse" target="_blank" rel="noopener noreferrer" 
+               class="shimmer-btn animate-shimmer block w-full text-center text-white font-extrabold py-3.5 rounded-2xl shadow-lg shadow-orange-600/20 transition-transform active:scale-[0.97] text-xs tracking-wide">
+                AMBIL HARGA GROSIR DI SHOPEE Sekarang ➔
+            </a>
+            <p class="text-[9px] text-center text-slate-400 mt-2">🛡️ Belanja Nyaman & Aman via Shopee Guarantee</p>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // FAQ Toggle Logic
+        function toggleFaq(id) {
+            const ans = document.getElementById(`faq-ans-${id}`);
+            const icon = document.getElementById(`faq-icon-${id}`);
+            if (ans.classList.contains('hidden')) {
+                ans.classList.remove('hidden');
+                icon.textContent = '−';
+                icon.classList.add('text-brand-600');
+            } else {
+                ans.classList.add('hidden');
+                icon.textContent = '+';
+                icon.classList.remove('text-brand-600');
+            }
+        }
+
+        // Live Simulated Incremental Toast Logic
+        window.addEventListener('DOMContentLoaded', () => {
+            const toast = document.getElementById('live-toast');
+            const toastNum = document.getElementById('toast-number');
+            
+            let angkaSekarang = Math.floor(Math.random() * (44 - 34 + 1)) + 34;
+
+            function jalankanSiklusToast() {
+                toastNum.textContent = angkaSekarang;
+                angkaSekarang += Math.floor(Math.random() * 3) + 1;
+
+                toast.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
+                toast.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                
+                setTimeout(() => {
+                    toast.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
+                    toast.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
+                    
+                    setTimeout(jalankanSiklusToast, 6000);
+                }, 4000);
+            }
+
+            setTimeout(jalankanSiklusToast, 2500);
+        });
+    </script>
+</body>
+</html>
