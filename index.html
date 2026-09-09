@@ -58,6 +58,34 @@
             background-size: 200% 100%;
         }
 
+        /* Custom dropdown (mengganti tampilan <select> bawaan) */
+        .cs { position: relative; }
+        .cs-native { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+        .cs-btn {
+            width: 100%; text-align: left;
+            font-size: .75rem; font-weight: 600; color: #1e293b;
+            background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem;
+            padding: .625rem 2.25rem .625rem .75rem;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='none' stroke='%235B32E4' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m4 6 4 4 4-4'/%3E%3C/svg%3E");
+            background-repeat: no-repeat; background-position: right .75rem center; background-size: 1rem;
+            cursor: pointer; transition: border-color .15s, box-shadow .15s;
+        }
+        .cs-btn:hover { border-color: #cbd5e1; }
+        .cs-btn[aria-expanded="true"] { border-color: #5B32E4; box-shadow: 0 0 0 3px rgba(91, 50, 228, .18); }
+        .cs-list {
+            position: absolute; z-index: 30; top: calc(100% + 4px); left: 0; right: 0;
+            list-style: none; margin: 0; padding: .25rem;
+            background: #fff; border: 1px solid #e2e8f0; border-radius: .5rem;
+            box-shadow: 0 12px 32px rgba(15, 23, 42, .14);
+            max-height: 220px; overflow-y: auto;
+        }
+        .cs-opt {
+            padding: .5rem .625rem; border-radius: .375rem;
+            font-size: .75rem; font-weight: 600; color: #334155; cursor: pointer;
+        }
+        .cs-opt:hover, .cs-opt:focus { background: #f5f3ff; outline: none; }
+        .cs-opt[aria-selected="true"] { color: #5B32E4; background: #ede9fe; }
+
         .faq summary { list-style: none; }
         .faq summary::-webkit-details-marker { display: none; }
         .faq .faq-ico::after { content: '+'; }
@@ -277,11 +305,11 @@
             <div class="grid grid-cols-2 gap-2.5">
                 <label class="flex flex-col gap-1">
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Produk</span>
-                    <select id="sim-product" class="text-xs font-semibold text-slate-800 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 focus:outline-none focus:border-brand-600"></select>
+                    <select id="sim-product"></select>
                 </label>
                 <label class="flex flex-col gap-1">
                     <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wide">Ambil Paket</span>
-                    <select id="sim-pack" class="text-xs font-semibold text-slate-800 bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-2 focus:outline-none focus:border-brand-600"></select>
+                    <select id="sim-pack"></select>
                 </label>
             </div>
 
@@ -599,6 +627,76 @@
             const rp = n => 'Rp ' + Math.round(n).toLocaleString('id-ID');
             const $ = id => document.getElementById(id);
             const selP = $('sim-product'), selK = $('sim-pack'), sell = $('sim-sell');
+            let csK; // widget custom untuk <select> paket, disinkron ulang tiap fillPacks
+
+            // Bungkus <select> asli dengan dropdown bergaya. <select> tetap jadi sumber data;
+            // semua listener 'change' yang ada tetap jalan lewat dispatchEvent.
+            function makeSelect(sel) {
+                const wrap = document.createElement('div');
+                wrap.className = 'cs';
+                sel.parentNode.insertBefore(wrap, sel);
+                wrap.appendChild(sel);
+                sel.classList.add('cs-native');
+                sel.tabIndex = -1;
+
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'cs-btn';
+                btn.setAttribute('aria-haspopup', 'listbox');
+                btn.setAttribute('aria-expanded', 'false');
+
+                const list = document.createElement('ul');
+                list.className = 'cs-list';
+                list.setAttribute('role', 'listbox');
+                list.hidden = true;
+                wrap.append(btn, list);
+
+                const close = () => { list.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
+                const open = () => {
+                    list.hidden = false;
+                    btn.setAttribute('aria-expanded', 'true');
+                    (list.querySelector('[aria-selected="true"]') || list.firstElementChild)?.focus();
+                };
+                function choose(i) {
+                    if (i < 0 || i >= sel.options.length) return;
+                    sel.selectedIndex = i;
+                    sel.dispatchEvent(new Event('change'));
+                    sync();
+                    close();
+                    btn.focus();
+                }
+                function sync() {
+                    btn.textContent = sel.options[sel.selectedIndex] ? sel.options[sel.selectedIndex].text : '';
+                    list.innerHTML = '';
+                    [...sel.options].forEach((o, i) => {
+                        const li = document.createElement('li');
+                        li.className = 'cs-opt';
+                        li.textContent = o.text;
+                        li.setAttribute('role', 'option');
+                        li.tabIndex = -1;
+                        if (i === sel.selectedIndex) li.setAttribute('aria-selected', 'true');
+                        li.addEventListener('click', () => choose(i));
+                        list.appendChild(li);
+                    });
+                }
+
+                btn.addEventListener('click', () => list.hidden ? open() : close());
+                btn.addEventListener('keydown', e => {
+                    if (['ArrowDown', 'Enter', ' '].includes(e.key)) { e.preventDefault(); open(); }
+                });
+                list.addEventListener('keydown', e => {
+                    const opts = [...list.children];
+                    const i = opts.indexOf(document.activeElement);
+                    if (e.key === 'ArrowDown') { e.preventDefault(); (opts[i + 1] || opts[0]).focus(); }
+                    else if (e.key === 'ArrowUp') { e.preventDefault(); (opts[i - 1] || opts[opts.length - 1]).focus(); }
+                    else if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); choose(i); }
+                    else if (e.key === 'Escape') { e.preventDefault(); close(); btn.focus(); }
+                });
+                document.addEventListener('click', e => { if (!wrap.contains(e.target)) close(); });
+
+                sync();
+                return { sync };
+            }
 
             Object.entries(PRODUCTS).forEach(([k, p]) =>
                 selP.add(new Option(p.name, k)));
@@ -608,6 +706,7 @@
                 selK.innerHTML = '';
                 p.packs.forEach((pk, i) => selK.add(new Option(pk.label, i)));
                 selK.value = Math.min(1, p.packs.length - 1); // default paket tengah (6)
+                if (csK) csK.sync();
             }
 
             function currentPack() {
@@ -640,7 +739,10 @@
             selK.addEventListener('change', () => { suggestSell(); render(); });
             sell.addEventListener('input', render);
 
-            fillPacks(); suggestSell(); render();
+            fillPacks();
+            makeSelect(selP);
+            csK = makeSelect(selK);
+            suggestSell(); render();
         })();
 
     </script>
